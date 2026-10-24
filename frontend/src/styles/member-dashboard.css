@@ -1,0 +1,428 @@
+/* =====================================
+   MEMBER DASHBOARD
+===================================== */
+
+.dashboard-overview {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    max-width: 1500px;
+    margin: 0 auto;
+}
+
+
+/* Welcome Section */
+
+.dashboard-welcome {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px 34px;
+    border-radius: 16px;
+    background: linear-gradient(115deg, #ede9fe, #f5f3ff, #eef2ff);
+}
+
+.dashboard-welcome h1 {
+    margin: 0;
+    color: #1f2937;
+    font-size: 27px;
+    font-weight: 750;
+    letter-spacing: -0.8px;
+}
+
+.dashboard-welcome p {
+    margin: 9px 0 0;
+    color: #6b7280;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.welcome-icon {
+    width: 65px;
+    height: 65px;
+    display: grid;
+    place-items: center;
+    border-radius: 18px;
+    background: #7c3aed;
+    color: #fff;
+    box-shadow: 0 8px 20px rgba(124, 58, 237, 0.2);
+}
+
+
+/* Membership Banner */
+
+.membership-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 25px 30px;
+    border-radius: 15px;
+    background: linear-gradient(115deg, #24104f, #5424a8, #7c3aed);
+    color: #fff;
+    box-shadow: 0 8px 22px rgba(91, 33, 182, 0.13);
+}
+
+.membership-label {
+    color: #ddd6fe;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+.membership-banner h2 {
+    margin: 9px 0 7px;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.membership-banner p {
+    margin: 0;
+    color: #ddd6fe;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.membership-status {
+    padding: 9px 17px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.13);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+}
+
+
+/* Section Heading */
+
+.section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.section-heading h2 {
+    margin: 0;
+    color: #1f2937;
+    font-size: 20px;
+    font-weight: 750;
+}
+
+.section-heading p {
+    margin: 6px 0 0;
+    color: #9ca3af;
+    font-size: 12px;
+}
+
+
+/* Statistics Cards */
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.stat-card {
+    padding: 22px;
+    border: 1px solid #edf0f5;
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 3px 12px rgba(31, 41, 55, 0.025);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 9px 22px rgba(31, 41, 55, 0.07);
+}
+
+.stat-icon {
+    width: 43px;
+    height: 43px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    margin-bottom: 18px;
+}
+
+.stat-icon.purple {
+    color: #7c3aed;
+    background: #ede9fe;
+}
+
+.stat-icon.blue {
+    color: #2563eb;
+    background: #dbeafe;
+}
+
+.stat-icon.orange {
+    color: #ea580c;
+    background: #ffedd5;
+}
+
+.stat-icon.green {
+    color: #059669;
+    background: #d1fae5;
+}
+
+.stat-card p {
+    margin: 0;
+    color: #9ca3af;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.stat-card h3 {
+    margin: 9px 0 5px;
+    color: #1f2937;
+    font-size: 25px;
+    font-weight: 750;
+    letter-spacing: -0.6px;
+}
+
+.stat-card span {
+    color: #9ca3af;
+    font-size: 11px;
+}
+
+
+/* Dashboard Grid */
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 20px;
+}
+
+.dashboard-card {
+    padding: 25px;
+    border: 1px solid #edf0f5;
+    border-radius: 15px;
+    background: #fff;
+    box-shadow: 0 3px 12px rgba(31, 41, 55, 0.025);
+}
+
+.card-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #7c3aed;
+}
+
+.card-heading h3 {
+    margin: 0;
+    color: #1f2937;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.card-heading p {
+    margin: 6px 0 0;
+    color: #9ca3af;
+    font-size: 11px;
+}
+
+
+/* Weekly Activity Chart */
+
+.activity-chart {
+    height: 190px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    gap: 14px;
+    padding: 22px 5px 0;
+}
+
+.activity-column {
+    height: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.activity-bar-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    border-radius: 7px;
+    background: #f5f3ff;
+}
+
+.activity-bar {
+    width: 55%;
+    min-height: 8px;
+    border-radius: 7px 7px 3px 3px;
+    background: linear-gradient(180deg, #a78bfa, #7c3aed);
+    transition: height 0.3s ease;
+}
+
+.activity-column span {
+    color: #9ca3af;
+    font-size: 11px;
+}
+
+
+/* Fitness Goal */
+
+.goal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 22px 10px 5px;
+}
+
+.goal-circle {
+    width: 132px;
+    height: 132px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: conic-gradient( #7c3aed 0% 75%, #ede9fe 75% 100%);
+    position: relative;
+}
+
+.goal-circle::before {
+    content: "";
+    position: absolute;
+    width: 105px;
+    height: 105px;
+    border-radius: 50%;
+    background: #fff;
+}
+
+.goal-circle strong {
+    position: relative;
+    z-index: 1;
+    color: #1f2937;
+    font-size: 25px;
+}
+
+.goal-content h4 {
+    margin: 17px 0 6px;
+    color: #1f2937;
+    font-size: 14px;
+}
+
+.goal-content p {
+    max-width: 230px;
+    margin: 0;
+    color: #9ca3af;
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+
+/* Upcoming Schedule */
+
+.schedule-card {
+    width: 100%;
+}
+
+.empty-schedule {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 35px 15px 20px;
+    text-align: center;
+    color: #a78bfa;
+}
+
+.empty-schedule h4 {
+    margin: 13px 0 5px;
+    color: #374151;
+    font-size: 14px;
+}
+
+.empty-schedule p {
+    margin: 0;
+    color: #9ca3af;
+    font-size: 11px;
+}
+
+
+/* Responsive Design */
+
+@media (max-width: 1100px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard-overview {
+        gap: 18px;
+    }
+    .dashboard-welcome {
+        padding: 23px 20px;
+    }
+    .dashboard-welcome h1 {
+        font-size: 21px;
+    }
+    .dashboard-welcome p {
+        font-size: 12px;
+    }
+    .welcome-icon {
+        width: 48px;
+        height: 48px;
+    }
+    .membership-banner {
+        padding: 22px 18px;
+    }
+    .membership-banner h2 {
+        font-size: 18px;
+    }
+    .membership-banner p {
+        font-size: 11px;
+    }
+    .stats-grid {
+        gap: 12px;
+    }
+    .stat-card {
+        padding: 17px;
+    }
+    .stat-card h3 {
+        font-size: 21px;
+    }
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    .dashboard-card {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 420px) {
+    .dashboard-welcome {
+        gap: 10px;
+    }
+    .welcome-icon {
+        flex-shrink: 0;
+    }
+    .stats-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    .stat-card {
+        padding: 14px;
+    }
+    .stat-card h3 {
+        font-size: 19px;
+    }
+    .membership-status {
+        padding: 7px 10px;
+        font-size: 9px;
+    }
+    .activity-chart {
+        gap: 8px;
+    }
+}
