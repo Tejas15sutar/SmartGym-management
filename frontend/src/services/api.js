@@ -1,7 +1,12 @@
 import axios from "axios";
 
+// Use Vercel's environment variable in production.
+// Fall back to the local Django backend during development.
+const API_BASE_URL =
+    import.meta.env.VITE_API_URL || "http://127.0.0.1:8000/api";
+
 const api = axios.create({
-    baseURL: "http://127.0.0.1:8000/api",
+    baseURL: API_BASE_URL,
     headers: {
         "Content-Type": "application/json",
     },
@@ -9,7 +14,10 @@ const api = axios.create({
 
 // Separate Axios instance to avoid interceptor loops.
 const refreshApi = axios.create({
-    baseURL: "http://127.0.0.1:8000/api",
+    baseURL: API_BASE_URL,
+    headers: {
+        "Content-Type": "application/json",
+    },
 });
 
 api.interceptors.request.use(
@@ -20,9 +28,9 @@ api.interceptors.request.use(
             "/auth/refresh/",
         ];
 
-        const isPublicEndpoint = publicEndpoints.some((endpoint) => {
-            return config.url && config.url.endsWith(endpoint);
-        });
+        const isPublicEndpoint = publicEndpoints.some((endpoint) =>
+            config.url && config.url.endsWith(endpoint)
+        );
 
         if (!isPublicEndpoint) {
             const token = localStorage.getItem("accessToken");
@@ -53,11 +61,14 @@ api.interceptors.response.use(
         ) {
             return Promise.reject(error);
         }
+
         const refreshToken = localStorage.getItem("refreshToken");
 
         if (!refreshToken) {
             localStorage.removeItem("accessToken");
+            localStorage.removeItem("refreshToken");
             localStorage.removeItem("user");
+
             window.location.href = "/login";
             return Promise.reject(error);
         }
@@ -72,7 +83,12 @@ api.interceptors.response.use(
                     })
                     .then((response) => {
                         const newAccessToken = response.data.access;
-                        localStorage.setItem("accessToken", newAccessToken);
+
+                        localStorage.setItem(
+                            "accessToken",
+                            newAccessToken
+                        );
+
                         return newAccessToken;
                     })
                     .finally(() => {
@@ -82,7 +98,11 @@ api.interceptors.response.use(
 
             const newAccessToken = await refreshPromise;
 
-            originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+            originalRequest.headers =
+                originalRequest.headers || {};
+
+            originalRequest.headers.Authorization =
+                `Bearer ${newAccessToken}`;
 
             return api(originalRequest);
         } catch (refreshError) {
