@@ -1,8 +1,20 @@
 
 from django.contrib import admin
+from django.http import JsonResponse
 from django.urls import include, path
 
+
+def home(request):
+    return JsonResponse({
+        "message": "SmartGym Backend is running successfully!",
+        "status": "online",
+        "api": "/api/",
+        "admin": "/admin/",
+    })
+
+
 urlpatterns = [
+    path("", home, name="home"),
     path("admin/", admin.site.urls),
     path("api/auth/", include("accounts.urls")),
     path("api/members/", include("members.urls")),
