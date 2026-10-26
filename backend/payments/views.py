@@ -104,6 +104,77 @@ class PaymentViewSet(viewsets.ModelViewSet):
     
     @action(
         detail=True,
+        methods=["post"],
+        url_path="confirm",
+    )
+    @transaction.atomic
+    def confirm(self, request, pk=None):
+        payment = self.get_object()
+
+        # Prevent confirming a payment twice.
+        if payment.payment_status == "SUCCESSFUL":
+            return Response(
+                PaymentSerializer(payment).data
+            )
+
+        if payment.payment_status != "PENDING":
+            raise ValidationError({
+                "payment_status": (
+                    "Only pending payments can be confirmed."
+                )
+            })
+
+        membership = payment.membership
+
+        if membership.member_id != payment.member_id:
+            raise ValidationError({
+                "membership": (
+                    "This payment does not match the membership member."
+                )
+            })
+
+        if membership.status == "CANCELLED":
+            raise ValidationError({
+                "membership": (
+                    "A cancelled membership cannot be activated."
+                )
+            })
+
+        now = timezone.now()
+
+        payment.payment_status = "SUCCESSFUL"
+        payment.payment_date = now
+        payment.save(
+            update_fields=["payment_status", "payment_date"]
+        )
+
+        membership.status = "ACTIVE"
+        membership.amount_paid = payment.amount
+
+        # Start the membership on the confirmation date.
+        membership.start_date = timezone.localdate()
+        membership.end_date = (
+            membership.start_date
+            + timezone.timedelta(
+                days=membership.plan.duration_days - 1
+            )
+        )
+
+        membership.save(
+            update_fields=[
+                "status",
+                "amount_paid",
+                "start_date",
+                "end_date",
+                "updated_at",
+            ]
+        )
+
+        return Response(PaymentSerializer(payment).data)
+
+    
+    @action(
+        detail=True,
         methods=["get"],
         url_path="receipt",
     )
