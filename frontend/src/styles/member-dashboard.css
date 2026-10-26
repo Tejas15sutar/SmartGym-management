@@ -426,3 +426,27 @@
         gap: 8px;
     }
 }
+
+
+/* Mobile Safari: improve Member Portal sidebar text visibility */
+
+@media (max-width: 768px) {
+    .member-sidebar a,
+    .member-sidebar button,
+    .member-sidebar .nav-item,
+    .member-sidebar .sidebar-link {
+        opacity: 1 !important;
+        -webkit-text-fill-color: currentColor;
+    }
+    .member-sidebar a,
+    .member-sidebar .nav-item,
+    .member-sidebar .sidebar-link {
+        color: #55566d;
+    }
+    .member-sidebar a.active,
+    .member-sidebar .nav-item.active,
+    .member-sidebar .sidebar-link.active {
+        color: #6040ce !important;
+        -webkit-text-fill-color: #6040ce !important;
+    }
+}
