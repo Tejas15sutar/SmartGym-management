@@ -443,3 +443,52 @@
         padding: 22px 5%;
     }
 }
+
+
+/* Mobile Safari: improve Login page text contrast */
+
+@media (max-width: 520px) {
+    .login-page .login-home-link {
+        color: #55566d !important;
+        opacity: 1 !important;
+        -webkit-text-fill-color: #55566d !important;
+    }
+    .login-page .login-intro h1,
+    .login-page .login-card-heading h2,
+    .login-page .login-brand {
+        opacity: 1 !important;
+        -webkit-text-fill-color: #17172f;
+    }
+    .login-page .login-intro h1 span,
+    .login-page .login-card-heading h2 span,
+    .login-page .login-lime {
+        color: #6040ce !important;
+        -webkit-text-fill-color: #6040ce !important;
+    }
+    .login-page .login-intro>p,
+    .login-page .login-highlight p,
+    .login-page .login-card-heading>p,
+    .login-page .login-show-password,
+    .login-page .login-footer>p {
+        color: #55566d !important;
+        opacity: 1 !important;
+        -webkit-text-fill-color: #55566d !important;
+    }
+    .login-page .login-field input::placeholder {
+        color: #73738a !important;
+        opacity: 1 !important;
+        -webkit-text-fill-color: #73738a !important;
+    }
+    .login-page .login-divider,
+    .login-page .login-card-note {
+        color: #66667d !important;
+        opacity: 1 !important;
+        -webkit-text-fill-color: #66667d !important;
+    }
+    .login-page .login-section-label,
+    .login-page .login-eyebrow {
+        color: #6040ce !important;
+        opacity: 1 !important;
+        -webkit-text-fill-color: #6040ce !important;
+    }
+}
