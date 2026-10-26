@@ -611,3 +611,47 @@
         transition-duration: 0.01ms !important;
     }
 }
+
+
+/* Mobile Safari: improve Home page text visibility */
+
+@media (max-width: 720px) {
+    .home-page .hero-content h1 {
+        color: #17172f !important;
+        opacity: 1 !important;
+        -webkit-text-fill-color: #17172f !important;
+        background: none !important;
+        text-shadow: none !important;
+    }
+    .home-page .hero-content h1 span {
+        color: #6040ce !important;
+        opacity: 1 !important;
+        -webkit-text-fill-color: #6040ce !important;
+        background: none !important;
+    }
+    .home-page .hero-eyebrow,
+    .home-page .hero-description,
+    .home-page .hero-caption,
+    .home-page .hero-stats strong,
+    .home-page .hero-stats span,
+    .home-page .section-heading h2,
+    .home-page .section-heading>p,
+    .home-page .portal-card h3,
+    .home-page .portal-card>p {
+        opacity: 1 !important;
+    }
+    .home-page .hero-description,
+    .home-page .hero-caption,
+    .home-page .hero-stats span,
+    .home-page .section-heading>p,
+    .home-page .portal-card>p {
+        color: #55566d !important;
+        -webkit-text-fill-color: #55566d !important;
+    }
+    .home-page .hero-stats strong,
+    .home-page .section-heading h2,
+    .home-page .portal-card h3 {
+        color: #17172f !important;
+        -webkit-text-fill-color: #17172f !important;
+    }
+}
