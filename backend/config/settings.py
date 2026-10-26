@@ -173,14 +173,16 @@ REST_FRAMEWORK = {
 }
 
 
+
 CORS_ALLOWED_ORIGINS = [
     origin.strip()
     for origin in os.getenv(
         "CORS_ALLOWED_ORIGINS",
-        "http://localhost:5173,https://smart-gym-management-od1i39o37-tejas-sutars-projects-7ef4fefd.vercel.app"
+        "http://localhost:5173,https://smart-gym-management-gold.vercel.app"
     ).split(",")
     if origin.strip()
 ]
+
 
 
 
