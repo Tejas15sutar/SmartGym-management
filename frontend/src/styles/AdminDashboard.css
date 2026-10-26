@@ -1174,3 +1174,38 @@
         padding: 16px;
     }
 }
+
+
+/* Mobile Safari: keep admin headings clearly visible */
+
+@media (max-width: 700px) {
+    .admin-page .admin-brand h2,
+    .admin-page .admin-topbar h1,
+    .admin-page .admin-section-heading h2,
+    .admin-page .admin-panel-heading h2,
+    .admin-page .admin-module-toolbar h2,
+    .admin-page .admin-form-heading h3 {
+        color: #20213a !important;
+        opacity: 1 !important;
+        -webkit-text-fill-color: #20213a !important;
+        background-image: none !important;
+        text-shadow: none !important;
+    }
+    .admin-page .admin-brand span,
+    .admin-page .admin-topbar p,
+    .admin-page .admin-section-heading p,
+    .admin-page .admin-panel-heading p {
+        color: #66677d !important;
+        opacity: 1 !important;
+        -webkit-text-fill-color: #66677d !important;
+    }
+    .admin-page .admin-nav-item {
+        color: #55566d;
+        opacity: 1;
+        -webkit-text-fill-color: currentColor;
+    }
+    .admin-page .admin-nav-item.active {
+        color: #6040d0;
+        -webkit-text-fill-color: #6040d0;
+    }
+}
