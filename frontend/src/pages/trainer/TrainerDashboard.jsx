@@ -1,5 +1,7 @@
 
 import { useCallback, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 import api from "../../services/api";
 import "../../styles/TrainerDashboard.css";
 
@@ -64,6 +66,14 @@ function getList(data) {
 }
 
 function TrainerDashboard() {
+    const navigate = useNavigate();
+    const { logout } = useAuth();
+
+    const handleLogout = () => {
+        logout();
+        navigate("/login", { replace: true });
+    };
+
     const [workoutPlans, setWorkoutPlans] = useState([]);
     const [assignments, setAssignments] = useState([]);
     const [attendance, setAttendance] = useState([]);
@@ -221,7 +231,19 @@ function TrainerDashboard() {
                     </p>
                 </div>
 
-                <div className="trainer-header-icon">🏋️</div>
+                <div className="trainer-header-actions">
+                    <div className="trainer-header-icon" aria-hidden="true">
+                        🏋️
+                    </div>
+                    <button
+                        type="button"
+                        className="trainer-logout-btn"
+                        onClick={handleLogout}
+                    >
+                        <span aria-hidden="true">↪</span>
+                        Logout
+                    </button>
+                </div>
             </header>
 
             {error && <div className="trainer-error">{error}</div>}

@@ -382,3 +382,48 @@
         padding: 7px 10px;
     }
 }
+
+
+/* Trainer Dashboard Header Actions */
+
+.trainer-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.trainer-logout-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 11px 18px;
+    border: 1px solid rgba(196, 244, 73, 0.35);
+    border-radius: 10px;
+    background: rgba(196, 244, 73, 0.08);
+    color: #c4f449;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.trainer-logout-btn:hover {
+    background: rgba(196, 244, 73, 0.16);
+    transform: translateY(-1px);
+}
+
+.trainer-logout-btn:focus-visible {
+    outline: 2px solid #c4f449;
+    outline-offset: 3px;
+}
+
+@media (max-width: 600px) {
+    .trainer-header-actions {
+        gap: 8px;
+    }
+    .trainer-logout-btn {
+        padding: 9px 12px;
+        font-size: 13px;
+    }
+}
