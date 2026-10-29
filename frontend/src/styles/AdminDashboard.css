@@ -33,16 +33,36 @@
     padding: 0 9px 32px;
 }
 
+.admin-brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
 .admin-brand-icon {
     display: grid;
     place-items: center;
-    width: 43px;
-    height: 43px;
-    border-radius: 13px;
-    background: linear-gradient(135deg, #8b70f4, #6544db);
-    color: #fff;
-    font-size: 25px;
+    flex: 0 0 48px;
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background: #7c3aed;
+    color: #ffffff;
+}
+
+.admin-brand>div:last-child h2 {
+    margin: 0 0 6px;
+    color: #171522;
+    font-size: 21px;
     font-weight: 800;
+    line-height: 1.2;
+}
+
+.admin-brand>div:last-child span {
+    color: #777487;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
 }
 
 .admin-brand h2 {

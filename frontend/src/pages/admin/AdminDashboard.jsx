@@ -1,6 +1,7 @@
 
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Dumbbell } from "lucide-react";
 import api from "../../services/api";
 import { useAuth } from "../../context/AuthContext";
 
@@ -113,13 +114,16 @@ function AdminDashboard() {
   return (
     <div className="admin-page">
       <aside className="admin-sidebar">
-        <div className="admin-brand">
-          <div className="admin-brand-icon">S</div>
-          <div>
-            <h2>SmartGym</h2>
-            <span>ADMIN PANEL</span>
+            <div className="admin-brand">
+            <div className="admin-brand-icon">
+              <Dumbbell size={29} strokeWidth={2.2} />
+            </div>
+
+            <div>
+              <h2>SmartGym</h2>
+              <span>FITNESS MANAGEMENT</span>
+            </div>
           </div>
-        </div>
 
         <div className="admin-menu-label">WORKSPACE</div>
 
