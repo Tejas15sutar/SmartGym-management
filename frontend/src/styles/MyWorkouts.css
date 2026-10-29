@@ -1,4 +1,4 @@
-/* SmartGym My Workouts layout enhancements — lavender and violet brand theme */
+/* SmartGym My Workouts — Improved Contrast & Responsive Layout */
 
 .my-workouts-page {
     width: 100%;
@@ -27,13 +27,14 @@
 .workout-page-header p {
     margin: 0;
     max-width: 620px;
-    color: #77738a;
+    color: #555368;
+    font-size: 14px;
     line-height: 1.65;
 }
 
 .workout-eyebrow,
 .workout-exercise-heading>div>span {
-    color: #7652ee;
+    color: #5937c5;
     font-size: 11px;
     font-weight: 800;
     letter-spacing: .16em;
@@ -44,9 +45,9 @@
     display: grid;
     place-items: center;
     flex: 0 0 auto;
-    color: #7652ee;
+    color: #5937c5;
     background: rgba(118, 82, 238, .09);
-    border: 1px solid rgba(118, 82, 238, .2);
+    border: 1px solid rgba(89, 55, 197, .25);
     border-radius: 16px;
 }
 
@@ -66,7 +67,7 @@
 .workout-assignment-card {
     min-width: 0;
     background: #ffffff;
-    border: 1px solid #e8e4f4;
+    border: 1px solid #ded9ec;
     border-radius: 18px;
 }
 
@@ -78,7 +79,7 @@
 }
 
 .workout-summary-card>svg {
-    color: #7652ee;
+    color: #5937c5;
 }
 
 .workout-summary-card h3 {
@@ -88,8 +89,9 @@
 
 .workout-summary-card p {
     margin: 4px 0 0;
-    color: #77738a;
+    color: #555368;
     font-size: 13px;
+    line-height: 1.5;
 }
 
 .workout-section-heading,
@@ -111,7 +113,7 @@
 
 .workout-section-heading>span,
 .exercise-count {
-    color: #7652ee;
+    color: #5937c5;
     font-size: 12px;
     font-weight: 700;
     white-space: nowrap;
@@ -130,7 +132,7 @@
 }
 
 .workout-assignment-card:hover {
-    border-color: rgba(118, 82, 238, .38);
+    border-color: rgba(89, 55, 197, .4);
 }
 
 .workout-card-top {
@@ -160,18 +162,18 @@
 }
 
 .workout-status.active {
-    background: rgba(118, 82, 238, .10);
-    color: #7652ee;
+    background: #eee8ff;
+    color: #5937c5;
 }
 
 .workout-status.completed {
-    background: rgba(22, 163, 116, .10);
-    color: #16845f;
+    background: #dcfce7;
+    color: #116b4c;
 }
 
 .workout-status.cancelled {
-    background: rgba(220, 38, 38, .08);
-    color: #c53030;
+    background: #fee2e2;
+    color: #a82020;
 }
 
 .workout-assignment-card>h3 {
@@ -182,7 +184,7 @@
 
 .workout-plan-description,
 .workout-card-notes {
-    color: #77738a;
+    color: #555368;
     font-size: 13px;
     line-height: 1.65;
     overflow-wrap: anywhere;
@@ -199,14 +201,15 @@
     display: flex;
     align-items: flex-start;
     gap: 8px;
-    color: #625d73;
-    font-size: 12px;
+    color: #49445d;
+    font-size: 13px;
+    line-height: 1.5;
     overflow-wrap: anywhere;
 }
 
 .workout-card-details svg {
     flex: 0 0 auto;
-    color: #7652ee;
+    color: #5937c5;
 }
 
 .workout-card-notes {
@@ -248,7 +251,7 @@
 .workout-exercise-section {
     margin-top: 22px;
     padding-top: 22px;
-    border-top: 1px solid #e7e2f2;
+    border-top: 1px solid #e0dbea;
 }
 
 .workout-exercise-heading {
@@ -271,15 +274,15 @@
     gap: 12px;
     margin-bottom: 12px;
     padding-bottom: 9px;
-    border-bottom: 1px solid #e7e2f2;
-    color: #7652ee;
+    border-bottom: 1px solid #e0dbea;
+    color: #5937c5;
     font-size: 11px;
     font-weight: 800;
     letter-spacing: .08em;
 }
 
 .workout-day-label span:last-child {
-    color: #77738a;
+    color: #555368;
     font-weight: 600;
     letter-spacing: 0;
     text-transform: none;
@@ -289,7 +292,7 @@
     min-width: 0;
     margin-top: 12px;
     padding: 15px;
-    border: 1px solid #e6e1f1;
+    border: 1px solid #ded9ec;
     border-radius: 15px;
     background: #ffffff;
 }
@@ -308,8 +311,8 @@
     width: 36px;
     height: 36px;
     border-radius: 11px;
-    background: rgba(118, 82, 238, .10);
-    color: #7652ee;
+    background: #eee8ff;
+    color: #5937c5;
     font-size: 13px;
     font-weight: 800;
 }
@@ -325,7 +328,7 @@
 }
 
 .exercise-title span {
-    color: #77738a;
+    color: #555368;
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: .08em;
@@ -337,7 +340,7 @@
 
 .exercise-video-panel {
     overflow: hidden;
-    border: 1px solid #ddd6f1;
+    border: 1px solid #d7cfee;
     border-radius: 13px;
     background: #f3f0fb;
 }
@@ -372,8 +375,8 @@
 }
 
 .exercise-video-heading div span {
-    color: #77738a;
-    font-size: 11px;
+    color: #555368;
+    font-size: 12px;
     line-height: 1.4;
 }
 
@@ -395,8 +398,8 @@
 
 .exercise-description,
 .exercise-instructions {
-    color: #77738a;
-    font-size: 12px;
+    color: #555368;
+    font-size: 13px;
     line-height: 1.7;
     overflow-wrap: anywhere;
 }
@@ -435,13 +438,13 @@
     gap: 5px;
     min-width: 0;
     padding: 11px 9px;
-    border: 1px solid #e8e4f4;
+    border: 1px solid #ded9ec;
     border-radius: 10px;
     background: #f7f6fc;
 }
 
 .exercise-stats svg {
-    color: #7652ee;
+    color: #5937c5;
 }
 
 .exercise-stats strong {
@@ -450,14 +453,15 @@
 }
 
 .exercise-stats span {
-    color: #8b859c;
-    font-size: 10px;
+    color: #555368;
+    font-size: 11px;
+    line-height: 1.4;
 }
 
 .exercise-notes {
     margin: 12px 0;
-    color: #77738a;
-    font-size: 12px;
+    color: #555368;
+    font-size: 13px;
     line-height: 1.6;
     white-space: pre-line;
 }
@@ -467,9 +471,9 @@
 }
 
 .exercise-complete-button:disabled {
-    border-color: #ddd6f1;
+    border-color: #d7cfee;
     background: #e8e4f4;
-    color: #7652ee;
+    color: #5937c5;
     cursor: default;
     transform: none;
 }
@@ -479,16 +483,16 @@
 .workout-loading,
 .workout-error {
     padding: 28px;
-    border: 1px solid #e8e4f4;
+    border: 1px solid #ded9ec;
     border-radius: 16px;
     background: #ffffff;
-    color: #77738a;
+    color: #555368;
     text-align: center;
     line-height: 1.6;
 }
 
 .workout-empty svg {
-    color: #7652ee;
+    color: #5937c5;
 }
 
 .workout-empty h3 {
@@ -508,6 +512,9 @@
 @media (max-width: 600px) {
     .my-workouts-page {
         padding: 14px;
+    }
+    .workout-page-header {
+        gap: 12px;
     }
     .workout-header-icon {
         width: 48px;
@@ -530,11 +537,33 @@
         font-size: 23px;
     }
     .workout-summary-card p {
-        font-size: 11px;
-        line-height: 1.4;
+        font-size: 12px;
+        line-height: 1.5;
     }
     .workout-card-details {
         grid-template-columns: 1fr;
+    }
+    .workout-plan-description,
+    .workout-card-notes,
+    .workout-card-details>div,
+    .workout-day-label span:last-child,
+    .exercise-title span,
+    .exercise-video-heading div span,
+    .exercise-description,
+    .exercise-instructions,
+    .exercise-notes,
+    .workout-empty,
+    .workout-no-exercises,
+    .workout-loading,
+    .workout-error {
+        color: #555368;
+    }
+    .workout-card-details>div,
+    .exercise-description,
+    .exercise-instructions,
+    .exercise-notes {
+        font-size: 13px;
+        line-height: 1.65;
     }
     .exercise-card {
         padding: 12px;
@@ -548,8 +577,12 @@
     .exercise-stats strong {
         font-size: 12px;
     }
+    .exercise-stats span {
+        font-size: 11px;
+        color: #555368;
+    }
     .exercise-video-heading div span {
-        font-size: 10px;
+        font-size: 11px;
     }
 }
 
