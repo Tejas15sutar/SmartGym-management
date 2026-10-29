@@ -12,6 +12,77 @@ import {
 } from "lucide-react";
 
 import workoutService from "../../services/workoutService";
+import "../../styles/MyWorkouts.css";
+
+// Supports direct video URLs and common YouTube links.
+function getYouTubeEmbedUrl(url = "") {
+    try {
+        const parsed = new URL(url);
+        if (parsed.hostname.includes("youtu.be")) {
+            return `https://www.youtube-nocookie.com/embed/${parsed.pathname.slice(1)}`;
+        }
+        if (parsed.hostname.includes("youtube.com")) {
+            if (parsed.pathname === "/watch") {
+                const videoId = parsed.searchParams.get("v");
+                return videoId
+                    ? `https://www.youtube-nocookie.com/embed/${videoId}`
+                    : "";
+            }
+            if (parsed.pathname.startsWith("/embed/")) {
+                return `https://www.youtube-nocookie.com${parsed.pathname}`;
+            }
+            if (parsed.pathname.startsWith("/shorts/")) {
+                const videoId = parsed.pathname.split("/")[2];
+                return videoId
+                    ? `https://www.youtube-nocookie.com/embed/${videoId}`
+                    : "";
+            }
+        }
+    } catch {
+        return "";
+    }
+    return "";
+}
+
+function ExerciseVideo({ url, title }) {
+    if (!url) return null;
+
+    const youtubeEmbedUrl = getYouTubeEmbedUrl(url);
+
+    return (
+        <div className="exercise-video-panel">
+            <div className="exercise-video-heading">
+                <span className="exercise-video-play-icon">▶</span>
+                <div>
+                    <strong>Exercise demonstration</strong>
+                    <span>Watch the correct movement before starting</span>
+                </div>
+            </div>
+
+            <div className="exercise-video-frame">
+                {youtubeEmbedUrl ? (
+                    <iframe
+                        src={youtubeEmbedUrl}
+                        title={`${title} exercise demonstration`}
+                        loading="lazy"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerPolicy="strict-origin-when-cross-origin"
+                        allowFullScreen
+                    />
+                ) : (
+                    <video
+                        controls
+                        preload="metadata"
+                        playsInline
+                        src={url}
+                    >
+                        Your browser does not support video playback.
+                    </video>
+                )}
+            </div>
+        </div>
+    );
+}
 
 function MyWorkouts() {
     const [assignments, setAssignments] = useState([]);
@@ -155,10 +226,16 @@ function MyWorkouts() {
                         const plan = workout.workout_plan_details;
 
                         const exercises = plan
-                            ? [...plan.plan_exercises].sort(
-                                  (a, b) => a.order - b.order
+                            ? [...(plan.plan_exercises || [])].sort(
+                                  (a, b) =>
+                                      (a.day_number || 1) - (b.day_number || 1) ||
+                                      (a.order || 0) - (b.order || 0)
                               )
                             : [];
+
+                        const workoutDays = [...new Set(
+                            exercises.map((exercise) => exercise.day_number || 1)
+                        )];
 
                         const isExpanded =
                             expandedWorkout === workout.id;
@@ -233,19 +310,28 @@ function MyWorkouts() {
                                     <div className="workout-exercise-section">
                                         <div className="workout-exercise-heading">
                                             <div>
-                                                <span>DAY 1</span>
-
-                                                <h4>
-                                                    Today's Workout
-                                                </h4>
+                                                <span>YOUR TRAINING PLAN</span>
+                                                <h4>Exercises & Demonstrations</h4>
                                             </div>
-
                                             <span className="exercise-count">
-                                                {exercises.length} Exercises
+                                                {exercises.length} {exercises.length === 1 ? "Exercise" : "Exercises"}
                                             </span>
                                         </div>
 
-                                        {exercises.map((exercise) => (
+                                        {exercises.length === 0 ? (
+                                            <div className="workout-no-exercises">
+                                                No exercises have been added to this plan yet.
+                                            </div>
+                                        ) : workoutDays.map((dayNumber) => (
+                                            <section className="workout-day-group" key={dayNumber}>
+                                                <div className="workout-day-label">
+                                                    <span>DAY {dayNumber}</span>
+                                                    <span>{exercises.filter((item) => (item.day_number || 1) === dayNumber).length} exercises</span>
+                                                </div>
+
+                                                {exercises
+                                                    .filter((item) => (item.day_number || 1) === dayNumber)
+                                                    .map((exercise) => (
                                             <div
                                                 className="exercise-card"
                                                 key={exercise.id}
@@ -269,6 +355,30 @@ function MyWorkouts() {
                                                         </span>
                                                     </div>
                                                 </div>
+
+                                                {(exercise.exercise_video_url || exercise.exercise_description || exercise.exercise_instructions) && (
+                                                    <div className="exercise-learning-content">
+                                                        {exercise.exercise_video_url && (
+                                                            <ExerciseVideo
+                                                                url={exercise.exercise_video_url}
+                                                                title={exercise.exercise_name}
+                                                            />
+                                                        )}
+
+                                                        {exercise.exercise_description && (
+                                                            <p className="exercise-description">
+                                                                {exercise.exercise_description}
+                                                            </p>
+                                                        )}
+
+                                                        {exercise.exercise_instructions && (
+                                                            <div className="exercise-instructions">
+                                                                <strong>How to perform</strong>
+                                                                <p>{exercise.exercise_instructions}</p>
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                )}
 
                                                 <div className="exercise-stats">
                                                     <div>
@@ -337,6 +447,8 @@ function MyWorkouts() {
                                                 </button>
                                                 
                                             </div>
+                                                ))}
+                                            </section>
                                         ))}
                                     </div>
                                 )}

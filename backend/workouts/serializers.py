@@ -15,19 +15,37 @@ class ExerciseSerializer(serializers.ModelSerializer):
         read_only_fields = ["id", "created_at"]
 
 
+
 class WorkoutPlanExerciseSerializer(serializers.ModelSerializer):
     exercise_name = serializers.CharField(
         source="exercise.name",
         read_only=True
     )
+
     exercise_category = serializers.CharField(
         source="exercise.category",
+        read_only=True
+    )
+
+    exercise_video_url = serializers.URLField(
+        source="exercise.video_url",
+        read_only=True
+    )
+
+    exercise_description = serializers.CharField(
+        source="exercise.description",
+        read_only=True
+    )
+
+    exercise_instructions = serializers.CharField(
+        source="exercise.instructions",
         read_only=True
     )
 
     class Meta:
         model = WorkoutPlanExercise
         fields = "__all__"
+
 
 
 class WorkoutPlanSerializer(serializers.ModelSerializer):
