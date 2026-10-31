@@ -11,6 +11,9 @@ import {
     Trash2,
     X,
     RefreshCw,
+    PhoneCall,
+    UserCheck,
+    CalendarCheck,
 } from "lucide-react";
 
 import receptionistService from "../../services/receptionistService";
@@ -46,6 +49,7 @@ const Enquiries = () => {
     const [editingId, setEditingId] = useState(null);
     const [form, setForm] = useState(EMPTY_FORM);
 
+    // Load enquiries
     const loadEnquiries = useCallback(async () => {
         try {
             setLoading(true);
@@ -72,6 +76,7 @@ const Enquiries = () => {
         loadEnquiries();
     }, [loadEnquiries]);
 
+    // Add enquiry
     const openAddForm = () => {
         setEditingId(null);
         setForm({ ...EMPTY_FORM });
@@ -80,8 +85,10 @@ const Enquiries = () => {
         setShowForm(true);
     };
 
+    // Edit enquiry
     const openEditForm = (enquiry) => {
         setEditingId(enquiry.id);
+
         setForm({
             name: enquiry.name || "",
             phone: enquiry.phone || "",
@@ -91,28 +98,35 @@ const Enquiries = () => {
             follow_up_date: enquiry.follow_up_date || "",
             notes: enquiry.notes || "",
         });
+
         setError("");
         setSuccess("");
         setShowForm(true);
     };
 
+    // Close modal
     const closeForm = () => {
         if (saving) return;
+
         setShowForm(false);
         setEditingId(null);
         setForm({ ...EMPTY_FORM });
     };
 
+    // Handle form inputs
     const handleInputChange = (event) => {
         const { name, value } = event.target;
+
         setForm((previous) => ({
             ...previous,
             [name]: value,
         }));
     };
 
+    // Create or update enquiry
     const handleSubmit = async (event) => {
         event.preventDefault();
+
         setError("");
         setSuccess("");
 
@@ -139,20 +153,24 @@ const Enquiries = () => {
                     editingId,
                     payload
                 );
+
                 setSuccess("Enquiry updated successfully.");
             } else {
                 await receptionistService.createEnquiry(payload);
+
                 setSuccess("Enquiry created successfully.");
             }
 
             setShowForm(false);
             setEditingId(null);
             setForm({ ...EMPTY_FORM });
+
             await loadEnquiries();
         } catch (err) {
             console.error("Unable to save enquiry:", err);
 
             const data = err.response?.data;
+
             const fieldError = data && Object.entries(data)
                 .find(([, value]) => Array.isArray(value));
 
@@ -166,6 +184,7 @@ const Enquiries = () => {
         }
     };
 
+    // Delete enquiry
     const handleDelete = async (enquiry) => {
         const confirmed = window.confirm(
             `Delete the enquiry for ${enquiry.name}? This cannot be undone.`
@@ -178,10 +197,13 @@ const Enquiries = () => {
 
         try {
             await receptionistService.deleteEnquiry(enquiry.id);
+
             setSuccess("Enquiry deleted successfully.");
+
             await loadEnquiries();
         } catch (err) {
             console.error("Unable to delete enquiry:", err);
+
             setError(
                 err.response?.data?.detail ||
                 "Unable to delete enquiry."
@@ -189,25 +211,32 @@ const Enquiries = () => {
         }
     };
 
+    // Status label
     const statusLabel = (status) =>
         STATUS_OPTIONS.find((item) => item.value === status)?.label ||
         status;
 
+    // Calculate enquiry counts
     const counts = STATUS_OPTIONS.reduce((result, status) => {
         result[status.value] = enquiries.filter(
             (item) => item.status === status.value
         ).length;
+
         return result;
     }, {});
 
     return (
         <main className="enquiries-page">
+
+            {/* Header */}
             <header className="enquiries-header">
                 <div>
                     <span className="enquiries-eyebrow">
                         RECEPTIONIST WORKSPACE
                     </span>
+
                     <h1>Enquiries</h1>
+
                     <p>
                         Manage potential members, follow-ups and joining
                         opportunities.
@@ -224,15 +253,18 @@ const Enquiries = () => {
                 </button>
             </header>
 
+            {/* Error message */}
             {error && !showForm && (
                 <div className="enquiries-alert enquiries-alert-error">
                     {error}
                 </div>
             )}
 
+            {/* Success message */}
             {success && (
                 <div className="enquiries-alert enquiries-alert-success">
                     {success}
+
                     <button
                         type="button"
                         aria-label="Dismiss message"
@@ -243,32 +275,50 @@ const Enquiries = () => {
                 </div>
             )}
 
+            {/* Statistics */}
             <section className="enquiries-stat-grid">
+
                 <article className="enquiries-stat-card">
                     <span>Total Results</span>
                     <strong>{enquiries.length}</strong>
                     <Users size={21} />
                 </article>
 
-                {STATUS_OPTIONS.slice(0, 3).map((item) => (
-                    <article
-                        className="enquiries-stat-card"
-                        key={item.value}
-                    >
-                        <span>{item.label}</span>
-                        <strong>{counts[item.value] || 0}</strong>
-                    </article>
-                ))}
+                <article className="enquiries-stat-card">
+                    <span>New Enquiries</span>
+                    <strong>{counts.NEW || 0}</strong>
+                    <PhoneCall size={21} />
+                </article>
+
+                <article className="enquiries-stat-card">
+                    <span>Contacted</span>
+                    <strong>{counts.CONTACTED || 0}</strong>
+                    <UserCheck size={21} />
+                </article>
+
+                <article className="enquiries-stat-card">
+                    <span>Visits Scheduled</span>
+                    <strong>{counts.VISIT_SCHEDULED || 0}</strong>
+                    <CalendarCheck size={21} />
+                </article>
+
             </section>
 
+            {/* Enquiries panel */}
             <section className="enquiries-panel">
+
+                {/* Search and filters */}
                 <div className="enquiries-toolbar">
+
                     <div className="enquiries-search">
                         <Search size={19} />
+
                         <input
                             type="search"
                             value={search}
-                            onChange={(event) => setSearch(event.target.value)}
+                            onChange={(event) =>
+                                setSearch(event.target.value)
+                            }
                             placeholder="Search name, phone or email..."
                             aria-label="Search enquiries"
                         />
@@ -282,8 +332,12 @@ const Enquiries = () => {
                         aria-label="Filter by status"
                     >
                         <option value="">All statuses</option>
+
                         {STATUS_OPTIONS.map((item) => (
-                            <option key={item.value} value={item.value}>
+                            <option
+                                key={item.value}
+                                value={item.value}
+                            >
                                 {item.label}
                             </option>
                         ))}
@@ -298,20 +352,28 @@ const Enquiries = () => {
                     >
                         <RefreshCw size={17} />
                     </button>
+
                 </div>
 
+                {/* Loading state */}
                 {loading ? (
                     <div className="enquiries-empty">
                         <RefreshCw size={28} />
                         <h3>Loading enquiries...</h3>
                     </div>
+
                 ) : enquiries.length === 0 ? (
+
+                    /* Empty state */
                     <div className="enquiries-empty">
                         <Users size={34} />
+
                         <h3>No enquiries found</h3>
+
                         <p>
                             Add a new enquiry or change your search filters.
                         </p>
+
                         <button
                             type="button"
                             className="enquiries-primary-btn"
@@ -321,9 +383,14 @@ const Enquiries = () => {
                             Add First Enquiry
                         </button>
                     </div>
+
                 ) : (
+
+                    /* Enquiries table */
                     <div className="enquiries-table-wrap">
+
                         <table className="enquiries-table">
+
                             <thead>
                                 <tr>
                                     <th>Prospective Member</th>
@@ -334,22 +401,28 @@ const Enquiries = () => {
                                     <th>Actions</th>
                                 </tr>
                             </thead>
+
                             <tbody>
                                 {enquiries.map((item) => (
                                     <tr key={item.id}>
+
                                         <td>
                                             <div className="enquiries-person">
+
                                                 <div className="enquiries-avatar">
                                                     {(item.name || "?")
                                                         .charAt(0)
                                                         .toUpperCase()}
                                                 </div>
+
                                                 <div>
                                                     <strong>{item.name}</strong>
+
                                                     <span>
                                                         <Phone size={13} />
                                                         {item.phone}
                                                     </span>
+
                                                     {item.email && (
                                                         <span>
                                                             <Mail size={13} />
@@ -357,11 +430,14 @@ const Enquiries = () => {
                                                         </span>
                                                     )}
                                                 </div>
+
                                             </div>
                                         </td>
+
                                         <td>
                                             {item.interested_plan || "—"}
                                         </td>
+
                                         <td>
                                             <span
                                                 className={
@@ -373,6 +449,7 @@ const Enquiries = () => {
                                                 {statusLabel(item.status)}
                                             </span>
                                         </td>
+
                                         <td>
                                             {item.follow_up_date ? (
                                                 <span className="enquiries-follow-up">
@@ -381,6 +458,7 @@ const Enquiries = () => {
                                                 </span>
                                             ) : "—"}
                                         </td>
+
                                         <td>
                                             <span
                                                 className="enquiries-notes"
@@ -389,8 +467,10 @@ const Enquiries = () => {
                                                 {item.notes || "—"}
                                             </span>
                                         </td>
+
                                         <td>
                                             <div className="enquiries-row-actions">
+
                                                 <button
                                                     type="button"
                                                     title="Edit enquiry"
@@ -401,6 +481,7 @@ const Enquiries = () => {
                                                 >
                                                     <Pencil size={16} />
                                                 </button>
+
                                                 <button
                                                     type="button"
                                                     className="enquiries-delete-btn"
@@ -412,39 +493,52 @@ const Enquiries = () => {
                                                 >
                                                     <Trash2 size={16} />
                                                 </button>
+
                                             </div>
                                         </td>
+
                                     </tr>
                                 ))}
                             </tbody>
+
                         </table>
                     </div>
                 )}
+
             </section>
 
+            {/* Add / Edit Enquiry Modal */}
             {showForm && (
                 <div
                     className="enquiries-modal-overlay"
                     onMouseDown={(event) => {
-                        if (event.target === event.currentTarget) closeForm();
+                        if (event.target === event.currentTarget) {
+                            closeForm();
+                        }
                     }}
                 >
+
                     <section
                         className="enquiries-modal"
                         role="dialog"
                         aria-modal="true"
                         aria-labelledby="enquiries-form-title"
                     >
+
+                        {/* Modal header */}
                         <header className="enquiries-modal-header">
+
                             <div>
                                 <h2 id="enquiries-form-title">
                                     {editingId ? "Edit Enquiry" : "Add Enquiry"}
                                 </h2>
+
                                 <p>
                                     Keep prospective member details and
                                     follow-up information up to date.
                                 </p>
                             </div>
+
                             <button
                                 type="button"
                                 className="enquiries-modal-close"
@@ -454,21 +548,27 @@ const Enquiries = () => {
                             >
                                 <X size={20} />
                             </button>
+
                         </header>
 
+                        {/* Form error */}
                         {error && (
                             <div className="enquiries-alert enquiries-alert-error">
                                 {error}
                             </div>
                         )}
 
+                        {/* Enquiry form */}
                         <form
                             className="enquiries-form"
                             onSubmit={handleSubmit}
                         >
+
                             <div className="enquiries-form-grid">
+
                                 <label>
                                     Full Name *
+
                                     <input
                                         name="name"
                                         value={form.name}
@@ -482,6 +582,7 @@ const Enquiries = () => {
 
                                 <label>
                                     Phone Number *
+
                                     <input
                                         name="phone"
                                         type="tel"
@@ -496,6 +597,7 @@ const Enquiries = () => {
 
                                 <label>
                                     Email Address
+
                                     <input
                                         name="email"
                                         type="email"
@@ -508,6 +610,7 @@ const Enquiries = () => {
 
                                 <label>
                                     Interested Plan
+
                                     <input
                                         name="interested_plan"
                                         value={form.interested_plan}
@@ -520,6 +623,7 @@ const Enquiries = () => {
 
                                 <label>
                                     Enquiry Status
+
                                     <select
                                         name="status"
                                         value={form.status}
@@ -539,6 +643,7 @@ const Enquiries = () => {
 
                                 <label>
                                     Next Follow-up
+
                                     <input
                                         name="follow_up_date"
                                         type="date"
@@ -550,6 +655,7 @@ const Enquiries = () => {
 
                                 <label className="enquiries-full-width">
                                     Notes
+
                                     <textarea
                                         name="notes"
                                         value={form.notes}
@@ -559,9 +665,12 @@ const Enquiries = () => {
                                         disabled={saving}
                                     />
                                 </label>
+
                             </div>
 
+                            {/* Form actions */}
                             <footer className="enquiries-form-actions">
+
                                 <button
                                     type="button"
                                     className="enquiries-secondary-btn"
@@ -570,6 +679,7 @@ const Enquiries = () => {
                                 >
                                     Cancel
                                 </button>
+
                                 <button
                                     type="submit"
                                     className="enquiries-primary-btn"
@@ -578,14 +688,18 @@ const Enquiries = () => {
                                     {saving
                                         ? "Saving..."
                                         : editingId
-                                        ? "Save Changes"
-                                        : "Create Enquiry"}
+                                            ? "Save Changes"
+                                            : "Create Enquiry"}
                                 </button>
+
                             </footer>
+
                         </form>
+
                     </section>
                 </div>
             )}
+
         </main>
     );
 };
