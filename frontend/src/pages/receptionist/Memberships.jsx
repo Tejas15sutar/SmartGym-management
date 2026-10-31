@@ -30,6 +30,7 @@ import membershipService from "../../services/membershipService";
 
 import receptionistService from "../../services/receptionistService";
 import api from "../../services/api";
+import "../../styles/ReceptionistMemberships.css";
 
 const Memberships = () => {
 
