@@ -54,6 +54,22 @@
 .brand-mark {
     display: grid;
     place-items: center;
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background: #7c3aed;
+    color: #ffffff;
+}
+
+.brand-mark svg {
+    width: 25px;
+    height: 25px;
+}
+
+.brand-mark {
+    display: grid;
+    place-items: center;
     width: 38px;
     height: 38px;
     border-radius: 11px;

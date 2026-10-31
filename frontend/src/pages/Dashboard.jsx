@@ -1,5 +1,6 @@
 
 import { useNavigate } from "react-router-dom";
+import { Dumbbell } from "lucide-react";
 import "../styles/Home.css";
 
 function Dashboard() {
@@ -47,7 +48,9 @@ function Dashboard() {
                     onClick={() => navigate("/")}
                     aria-label="SmartGym home"
                 >
-                    <span className="brand-mark">S</span>
+                    <span className="brand-mark">
+                        <Dumbbell size={25} strokeWidth={2.2} />
+                    </span>
                     <span>
                         SMART<span className="brand-accent">GYM</span>
                     </span>
