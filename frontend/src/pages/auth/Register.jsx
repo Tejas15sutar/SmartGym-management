@@ -21,19 +21,94 @@ function Register() {
     const [loading, setLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
 
+    // Validate registration form
+    const validateForm = () => {
+        const {
+            username,
+            first_name,
+            last_name,
+            email,
+            phone,
+            password,
+            confirmPassword,
+        } = formData;
+
+        // Username validation
+        if (!/^[a-zA-Z0-9_]{4,20}$/.test(username)) {
+            return "Username must be 4-20 characters and contain only letters, numbers or underscores.";
+        }
+
+        // First name validation
+        if (!/^[a-zA-Z ]{2,30}$/.test(first_name.trim())) {
+            return "Please enter a valid first name.";
+        }
+
+        // Last name validation
+        if (!/^[a-zA-Z ]{2,30}$/.test(last_name.trim())) {
+            return "Please enter a valid last name.";
+        }
+
+        // Gmail validation
+        if (!/^[a-zA-Z0-9._%+-]+@gmail\.com$/i.test(email.trim())) {
+            return "Please enter a valid Gmail address (example@gmail.com).";
+        }
+
+        // Indian mobile number validation
+        if (!/^[6-9]\d{9}$/.test(phone.trim())) {
+            return "Phone number must contain exactly 10 digits and start with 6, 7, 8 or 9.";
+        }
+
+        // Password validation
+        if (password.length < 8) {
+            return "Password must contain at least 8 characters.";
+        }
+
+        if (!/[A-Z]/.test(password)) {
+            return "Password must contain at least one uppercase letter.";
+        }
+
+        if (!/[a-z]/.test(password)) {
+            return "Password must contain at least one lowercase letter.";
+        }
+
+        if (!/[0-9]/.test(password)) {
+            return "Password must contain at least one number.";
+        }
+
+        if (!/[^A-Za-z0-9]/.test(password)) {
+            return "Password must contain at least one special character.";
+        }
+
+        // Confirm password validation
+        if (password !== confirmPassword) {
+            return "Passwords do not match.";
+        }
+
+        return "";
+    };
+
     const handleChange = (e) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value,
-        });
+        const { name, value } = e.target;
+
+        setFormData((prev) => ({
+            ...prev,
+            [name]:
+                name === "phone"
+                    ? value.replace(/\D/g, "").slice(0, 10)
+                    : value,
+        }));
+
+        setError("");
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError("");
 
-        if (formData.password !== formData.confirmPassword) {
-            setError("Passwords do not match.");
+        const validationError = validateForm();
+
+        if (validationError) {
+            setError(validationError);
             return;
         }
 
@@ -41,6 +116,12 @@ function Register() {
 
         try {
             const { confirmPassword, ...registrationData } = formData;
+
+            registrationData.username = registrationData.username.trim();
+            registrationData.first_name = registrationData.first_name.trim();
+            registrationData.last_name = registrationData.last_name.trim();
+            registrationData.email = registrationData.email.trim().toLowerCase();
+            registrationData.phone = registrationData.phone.trim();
 
             await api.post("/auth/register/", registrationData);
 
@@ -70,13 +151,48 @@ function Register() {
     };
 
     const fields = [
-        { name: "username", label: "Username", placeholder: "Choose a username", autoComplete: "username" },
-        { name: "first_name", label: "First name", placeholder: "Enter your first name", autoComplete: "given-name" },
-        { name: "last_name", label: "Last name", placeholder: "Enter your last name", autoComplete: "family-name" },
-        { name: "email", label: "Email address", placeholder: "you@example.com", autoComplete: "email" },
-        { name: "phone", label: "Phone number", placeholder: "Enter your phone number", autoComplete: "tel" },
-        { name: "password", label: "Password", placeholder: "Create a password", autoComplete: "new-password" },
-        { name: "confirmPassword", label: "Confirm password", placeholder: "Re-enter your password", autoComplete: "new-password" },
+        {
+            name: "username",
+            label: "Username",
+            placeholder: "Choose a username",
+            autoComplete: "username",
+        },
+        {
+            name: "first_name",
+            label: "First name",
+            placeholder: "Enter your first name",
+            autoComplete: "given-name",
+        },
+        {
+            name: "last_name",
+            label: "Last name",
+            placeholder: "Enter your last name",
+            autoComplete: "family-name",
+        },
+        {
+            name: "email",
+            label: "Email address",
+            placeholder: "you@gmail.com",
+            autoComplete: "email",
+        },
+        {
+            name: "phone",
+            label: "Phone number",
+            placeholder: "Enter 10 digit mobile number",
+            autoComplete: "tel",
+        },
+        {
+            name: "password",
+            label: "Password",
+            placeholder: "Create a password",
+            autoComplete: "new-password",
+        },
+        {
+            name: "confirmPassword",
+            label: "Confirm password",
+            placeholder: "Re-enter your password",
+            autoComplete: "new-password",
+        },
     ];
 
     return (
@@ -154,6 +270,7 @@ function Register() {
                     <form
                         className="register-form"
                         onSubmit={handleSubmit}
+                        noValidate
                     >
                         <div className="register-fields">
                             {fields.map((field) => {
@@ -194,6 +311,16 @@ function Register() {
                                                 onChange={handleChange}
                                                 placeholder={field.placeholder}
                                                 autoComplete={field.autoComplete}
+                                                maxLength={
+                                                    field.name === "phone"
+                                                        ? 10
+                                                        : undefined
+                                                }
+                                                inputMode={
+                                                    field.name === "phone"
+                                                        ? "numeric"
+                                                        : undefined
+                                                }
                                                 required
                                             />
                                         </div>
