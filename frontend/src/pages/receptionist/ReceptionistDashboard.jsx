@@ -23,6 +23,8 @@ import {
     Eye,
 
     EyeOff,
+    
+    Dumbbell
 
 } from "lucide-react";
 
@@ -1211,10 +1213,19 @@ const ReceptionistDashboard = () => {
             ========================== */}
 
             <div className="receptionist-page-header">
+                <div className="receptionist-brand">
+                    <div className="receptionist-brand-icon">
+                        <Dumbbell size={29} strokeWidth={2.2} />
+                    </div>
 
+                    <div>
+                        <h2>SmartGym</h2>
+                        <span>FITNESS MANAGEMENT</span>
+                    </div>
+                </div>
                 <div>
 
-                    <h1>Receptionist Dashboard</h1>
+                    <h2>Receptionist Dashboard</h2>
 
                     <p>
 

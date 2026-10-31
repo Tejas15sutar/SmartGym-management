@@ -1,24 +1,24 @@
 /* =========================================
    SMARTGYM — RECEPTIONIST DASHBOARD
-   Scoped styles: Receptionist only
+   Admin Dashboard matching design system
 ========================================= */
 
 .receptionist-page {
-    --reception-purple: #7652ee;
-    --reception-purple-dark: #392568;
-    --reception-lavender: #f1ebff;
-    --reception-text: #17152b;
-    --reception-muted: #85839d;
-    --reception-border: #eae8f3;
+    --reception-purple: #7554e8;
+    --reception-purple-dark: #6040d0;
+    --reception-lavender: #f0ebff;
+    --reception-text: #20213a;
+    --reception-muted: #85869a;
+    --reception-border: #ececf4;
     width: 100%;
     max-width: 1500px;
     min-height: 100vh;
     margin: 0 auto;
-    padding: 36px 40px 48px;
+    padding: 30px 34px 40px;
     box-sizing: border-box;
-    background: #f7f6fc;
+    background: #f7f7fc;
     color: var(--reception-text);
-    font-family: "DM Sans", "Segoe UI", sans-serif;
+    font-family: Inter, "Segoe UI", Arial, sans-serif;
 }
 
 .receptionist-page *,
@@ -28,85 +28,84 @@
 }
 
 
-/* Page header */
+/* =========================================
+   PAGE HEADER
+========================================= */
 
 .receptionist-page-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 28px;
+    gap: 20px;
+    margin-bottom: 27px;
 }
 
 .receptionist-page-header h1 {
-    margin: 0 0 9px;
-    font-size: clamp(28px, 3vw, 36px);
-    font-weight: 750;
-    letter-spacing: -1.2px;
-    color: #151326;
+    margin: 0;
+    color: var(--reception-text);
+    font-size: clamp(25px, 3vw, 32px);
+    font-weight: 800;
+    letter-spacing: -1px;
 }
 
 .receptionist-page-header p {
-    margin: 0;
+    margin: 8px 0 0;
     color: var(--reception-muted);
-    font-size: 15px;
+    font-size: 13px;
     line-height: 1.7;
 }
 
-
-/* Welcome banner */
-
 .receptionist-page-header::after {
     content: "✦";
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: grid;
+    place-items: center;
     flex-shrink: 0;
-    width: 54px;
-    height: 54px;
-    margin-left: 20px;
-    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
     background: var(--reception-lavender);
     color: var(--reception-purple);
-    font-size: 26px;
+    font-size: 23px;
 }
 
 
-/* Statistics */
+/* =========================================
+   STATISTICS
+========================================= */
 
 .receptionist-stats {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 18px;
-    margin-bottom: 28px;
+    gap: 17px;
+    margin-bottom: 23px;
 }
 
 .receptionist-stat-card {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 14px;
     min-width: 0;
-    min-height: 126px;
-    padding: 24px 20px;
-    background: #ffffff;
+    min-height: 112px;
+    padding: 20px;
     border: 1px solid var(--reception-border);
-    border-radius: 18px;
-    box-shadow: 0 5px 18px rgba(47, 34, 94, 0.035);
-    transition: transform 180ms ease, box-shadow 180ms ease;
+    border-radius: 14px;
+    background: #ffffff;
+    box-shadow: 0 4px 15px #24204b04;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .receptionist-stat-card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 26px rgba(47, 34, 94, 0.08);
+    box-shadow: 0 9px 24px #24204b0c;
 }
 
 .receptionist-stat-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    width: 52px;
-    height: 52px;
-    border-radius: 15px;
+    display: grid;
+    place-items: center;
+    flex: 0 0 42px;
+    width: 42px;
+    height: 42px;
+    border-radius: 11px;
     background: var(--reception-lavender);
     color: var(--reception-purple);
 }
@@ -117,103 +116,107 @@
 
 .receptionist-stat-card span {
     display: block;
-    margin-bottom: 9px;
-    color: var(--reception-muted);
-    font-size: 13px;
+    margin-bottom: 8px;
+    color: #77788d;
+    font-size: 12px;
     line-height: 1.5;
 }
 
 .receptionist-stat-card strong {
     display: block;
     overflow-wrap: anywhere;
-    color: #19162e;
-    font-size: clamp(23px, 2vw, 30px);
+    color: var(--reception-text);
+    font-size: 27px;
     font-weight: 800;
-    letter-spacing: -0.8px;
+    letter-spacing: -1px;
 }
 
 
-/* Main dashboard columns */
+/* =========================================
+   DASHBOARD COLUMNS
+========================================= */
 
 .receptionist-dashboard-grid {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
     align-items: stretch;
-    gap: 24px;
+    gap: 19px;
 }
 
 .receptionist-section {
     min-width: 0;
-    padding: 28px;
-    background: #ffffff;
+    padding: 23px;
     border: 1px solid var(--reception-border);
-    border-radius: 20px;
-    box-shadow: 0 5px 20px rgba(47, 34, 94, 0.035);
+    border-radius: 15px;
+    background: #ffffff;
+    box-shadow: 0 4px 15px #24204b04;
 }
 
 .receptionist-section-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 25px;
+    gap: 12px;
+    margin-bottom: 21px;
 }
 
 .receptionist-section-header h2 {
-    margin: 0 0 8px;
-    color: #19162e;
-    font-size: 21px;
+    margin: 0;
+    color: var(--reception-text);
+    font-size: 17px;
     font-weight: 750;
-    letter-spacing: -0.5px;
+    letter-spacing: -0.3px;
 }
 
 .receptionist-section-header p {
-    margin: 0;
+    margin: 6px 0 0;
     color: var(--reception-muted);
-    font-size: 13px;
+    font-size: 12px;
     line-height: 1.6;
 }
 
 
-/* Quick actions */
+/* =========================================
+   QUICK ACTIONS
+========================================= */
 
 .receptionist-actions {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 14px;
+    gap: 11px;
 }
 
 .receptionist-actions button {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    gap: 17px;
+    align-items: center;
+    gap: 11px;
     min-width: 0;
-    min-height: 112px;
-    padding: 20px;
-    border: 1px solid #e9e7f0;
-    border-radius: 15px;
-    background: #faf9fd;
-    color: #28243c;
+    min-height: 76px;
+    padding: 13px;
+    border: 1px solid #efedf7;
+    border-radius: 11px;
+    background: #ffffff;
+    color: #29263b;
     text-align: left;
     font: inherit;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 700;
     cursor: pointer;
-    transition: background 180ms ease, border-color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+    transition: border-color 0.2s, background 0.2s, transform 0.2s;
 }
 
 .receptionist-actions button svg {
     flex-shrink: 0;
+    width: 21px;
+    height: 21px;
     color: var(--reception-purple);
-    transition: transform 180ms ease;
+    transition: transform 0.2s;
 }
 
 .receptionist-actions button:hover {
-    background: #f2edff;
-    border-color: #d7caff;
+    border-color: #d8ccff;
+    background: #faf8ff;
     transform: translateY(-2px);
-    box-shadow: 0 7px 16px rgba(118, 82, 238, 0.08);
 }
 
 .receptionist-actions button:hover svg {
@@ -222,17 +225,19 @@
 
 .receptionist-actions button:focus-visible,
 .receptionist-modal button:focus-visible {
-    outline: 3px solid rgba(118, 82, 238, 0.3);
+    outline: 3px solid rgba(117, 84, 232, 0.25);
     outline-offset: 3px;
 }
 
 
-/* Today's activity */
+/* =========================================
+   TODAY'S ACTIVITY
+========================================= */
 
 .receptionist-activity-list {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 0;
     min-height: 300px;
 }
 
@@ -248,11 +253,11 @@
 }
 
 .receptionist-empty>svg {
-    margin-bottom: 18px;
-    padding: 12px;
     width: 58px;
     height: 58px;
-    border-radius: 18px;
+    margin-bottom: 18px;
+    padding: 12px;
+    border-radius: 15px;
     background: var(--reception-lavender);
     color: var(--reception-purple);
 }
@@ -260,7 +265,7 @@
 .receptionist-empty h3 {
     margin: 0 0 9px;
     color: #302a48;
-    font-size: 17px;
+    font-size: 16px;
     font-weight: 750;
 }
 
@@ -268,28 +273,30 @@
     max-width: 300px;
     margin: 0;
     color: var(--reception-muted);
-    font-size: 13px;
+    font-size: 12px;
     line-height: 1.7;
 }
 
 .receptionist-activity-item {
     display: flex;
     align-items: center;
-    gap: 13px;
-    padding: 15px;
-    border: 1px solid #efedf5;
-    border-radius: 14px;
+    gap: 11px;
+    padding: 15px 0;
+    border-bottom: 1px solid #f0eff6;
     background: #ffffff;
 }
 
+.receptionist-activity-item:last-child {
+    border-bottom: 0;
+}
+
 .receptionist-activity-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: grid;
+    place-items: center;
     flex-shrink: 0;
-    width: 42px;
-    height: 42px;
-    border-radius: 13px;
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
     background: var(--reception-lavender);
     color: var(--reception-purple);
 }
@@ -304,25 +311,27 @@
 
 .receptionist-activity-info strong {
     overflow-wrap: anywhere;
-    color: #27233b;
-    font-size: 13px;
-    font-weight: 750;
-}
-
-.receptionist-activity-info span {
-    color: #77738d;
-    font-size: 12px;
-}
-
-.receptionist-activity-time {
-    flex-shrink: 0;
-    color: #69627f;
+    color: #29263b;
     font-size: 12px;
     font-weight: 700;
 }
 
+.receptionist-activity-info span {
+    color: var(--reception-muted);
+    font-size: 11px;
+}
 
-/* Modal overlay */
+.receptionist-activity-time {
+    flex-shrink: 0;
+    color: #77788d;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+
+/* =========================================
+   MODAL OVERLAY
+========================================= */
 
 .receptionist-modal-overlay {
     position: fixed;
@@ -343,11 +352,11 @@
     max-width: 650px;
     max-height: calc(100vh - 48px);
     overflow-y: auto;
-    padding: 30px;
-    border: 1px solid rgba(255, 255, 255, 0.7);
-    border-radius: 22px;
+    padding: 26px;
+    border: 1px solid var(--reception-border);
+    border-radius: 16px;
     background: #ffffff;
-    box-shadow: 0 24px 80px rgba(22, 13, 53, 0.25);
+    box-shadow: 0 20px 60px rgba(22, 13, 53, 0.18);
     animation: receptionist-modal-in 180ms ease-out;
 }
 
@@ -367,72 +376,73 @@
     justify-content: space-between;
     align-items: flex-start;
     gap: 20px;
-    margin-bottom: 25px;
-    padding-bottom: 22px;
-    border-bottom: 1px solid #eeebf5;
+    margin-bottom: 22px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--reception-border);
 }
 
 .receptionist-modal-header h2 {
-    margin: 0 0 8px;
-    color: #211b39;
-    font-size: 23px;
+    margin: 0 0 7px;
+    color: var(--reception-text);
+    font-size: 21px;
     font-weight: 800;
-    letter-spacing: -0.6px;
+    letter-spacing: -0.5px;
 }
 
 .receptionist-modal-header p {
     margin: 0;
     color: var(--reception-muted);
-    font-size: 13px;
+    font-size: 12px;
     line-height: 1.6;
 }
 
 .receptionist-modal-close {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: grid;
+    place-items: center;
     flex-shrink: 0;
-    width: 38px;
-    height: 38px;
-    border: 1px solid #e9e5f2;
-    border-radius: 12px;
-    background: #f8f6fc;
-    color: #655d7b;
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--reception-border);
+    border-radius: 10px;
+    background: #f8f7fc;
+    color: #65667b;
     cursor: pointer;
-    transition: background 150ms ease, color 150ms ease;
+    transition: background 0.2s, color 0.2s;
 }
 
 .receptionist-modal-close:hover {
-    background: #f0eaff;
-    color: var(--reception-purple);
+    background: var(--reception-lavender);
+    color: var(--reception-purple-dark);
 }
 
 
-/* Form layout */
+/* =========================================
+   FORM LAYOUT
+========================================= */
 
 .receptionist-form {
     display: flex;
     flex-direction: column;
-    gap: 19px;
+    gap: 17px;
 }
 
 .receptionist-form-row {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 17px;
+    gap: 16px;
 }
 
 .receptionist-form-group {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 7px;
     min-width: 0;
 }
 
 .receptionist-form-group label {
-    color: #39334e;
+    color: #4b4860;
     font-size: 13px;
-    font-weight: 700;
+    font-weight: 600;
 }
 
 .receptionist-form-group input,
@@ -440,20 +450,20 @@
 .receptionist-form-group textarea {
     width: 100%;
     min-width: 0;
-    padding: 12px 14px;
-    border: 1px solid #e2deed;
-    border-radius: 11px;
+    padding: 11px 12px;
+    border: 1px solid #dedbe9;
+    border-radius: 8px;
     outline: none;
     background: #ffffff;
-    color: #252039;
+    color: #29263b;
     font: inherit;
     font-size: 13px;
-    transition: border-color 160ms ease, box-shadow 160ms ease;
+    transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .receptionist-form-group input,
 .receptionist-form-group select {
-    min-height: 45px;
+    min-height: 43px;
 }
 
 .receptionist-form-group textarea {
@@ -470,7 +480,7 @@
 .receptionist-form-group select:focus,
 .receptionist-form-group textarea:focus {
     border-color: var(--reception-purple);
-    box-shadow: 0 0 0 3px rgba(118, 82, 238, 0.12);
+    box-shadow: 0 0 0 3px rgba(117, 84, 232, 0.1);
 }
 
 .receptionist-form-group input:disabled,
@@ -481,7 +491,9 @@
 }
 
 
-/* Password controls */
+/* =========================================
+   PASSWORD CONTROLS
+========================================= */
 
 .receptionist-password-wrapper {
     position: relative;
@@ -496,9 +508,8 @@
 .receptionist-password-toggle {
     position: absolute;
     right: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: grid;
+    place-items: center;
     width: 32px;
     height: 32px;
     border: none;
@@ -509,21 +520,23 @@
 }
 
 .receptionist-password-toggle:hover {
-    background: #f1edfc;
+    background: var(--reception-lavender);
     color: var(--reception-purple);
 }
 
 
-/* Role and membership notes */
+/* =========================================
+   ROLE AND MEMBERSHIP NOTES
+========================================= */
 
 .receptionist-member-role-note {
     display: flex;
     align-items: flex-start;
     gap: 10px;
-    padding: 13px 15px;
+    padding: 13px 14px;
     border: 1px solid #e4dcff;
-    border-radius: 12px;
-    background: #f7f3ff;
+    border-radius: 10px;
+    background: #f7f4ff;
     color: #5a4b83;
     font-size: 12px;
     line-height: 1.7;
@@ -536,24 +549,26 @@
 }
 
 
-/* Success and error messages */
+/* =========================================
+   SUCCESS AND ERROR MESSAGES
+========================================= */
 
 .receptionist-success,
 .receptionist-error {
     display: flex;
     align-items: flex-start;
     gap: 10px;
-    margin-bottom: 18px;
-    padding: 13px 15px;
-    border-radius: 11px;
+    margin-bottom: 16px;
+    padding: 12px 14px;
+    border-radius: 9px;
     font-size: 13px;
     line-height: 1.6;
 }
 
 .receptionist-success {
-    border: 1px solid #bdebd4;
-    background: #effbf5;
-    color: #187449;
+    border: 1px solid #c9efd8;
+    background: #eaf9f0;
+    color: #176b40;
 }
 
 .receptionist-success svg {
@@ -562,22 +577,24 @@
 }
 
 .receptionist-error {
-    border: 1px solid #f3caca;
-    background: #fff3f3;
-    color: #b42332;
+    border: 1px solid #f4d2d2;
+    background: #fff0f0;
+    color: #a62e35;
 }
 
 
-/* Modal action buttons */
+/* =========================================
+   MODAL ACTION BUTTONS
+========================================= */
 
 .receptionist-form-actions {
     display: flex;
     justify-content: flex-end;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 10px;
     margin-top: 5px;
-    padding-top: 20px;
-    border-top: 1px solid #eeebf5;
+    padding-top: 17px;
+    border-top: 1px solid var(--reception-border);
 }
 
 .receptionist-cancel-btn,
@@ -585,37 +602,38 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-height: 43px;
-    padding: 11px 20px;
-    border-radius: 11px;
+    min-height: 41px;
+    padding: 10px 17px;
+    border-radius: 9px;
     font: inherit;
     font-size: 13px;
-    font-weight: 750;
+    font-weight: 700;
     cursor: pointer;
-    transition: transform 150ms ease, background 150ms ease, box-shadow 150ms ease;
+    transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
 }
 
 .receptionist-cancel-btn {
-    border: 1px solid #e5e1ee;
-    background: #ffffff;
-    color: #625b78;
+    border: 1px solid #dedbe9;
+    background: #f0eef8;
+    color: #51447f;
 }
 
 .receptionist-cancel-btn:hover {
-    background: #f7f5fb;
+    background: #e9e5f4;
 }
 
 .receptionist-submit-btn {
     border: 1px solid var(--reception-purple);
     background: var(--reception-purple);
     color: #ffffff;
-    box-shadow: 0 4px 10px rgba(118, 82, 238, 0.18);
+    box-shadow: 0 3px 9px rgba(117, 84, 232, 0.15);
 }
 
 .receptionist-submit-btn:hover {
     transform: translateY(-1px);
-    background: #6440df;
-    box-shadow: 0 7px 15px rgba(118, 82, 238, 0.24);
+    border-color: var(--reception-purple-dark);
+    background: var(--reception-purple-dark);
+    box-shadow: 0 6px 14px rgba(117, 84, 232, 0.2);
 }
 
 .receptionist-cancel-btn:disabled,
@@ -628,47 +646,46 @@
 }
 
 
-/* Tablet */
+/* =========================================
+   TABLET
+========================================= */
 
-@media (max-width: 1100px) {
+@media (max-width: 1150px) {
     .receptionist-page {
-        padding: 30px 24px 40px;
+        padding: 25px 22px 35px;
     }
     .receptionist-stats {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
     .receptionist-dashboard-grid {
-        grid-template-columns: minmax(0, 1fr);
-    }
-    .receptionist-activity-list,
-    .receptionist-empty {
-        min-height: 220px;
+        grid-template-columns: 1fr;
     }
 }
 
 
-/* Mobile */
+/* =========================================
+   MOBILE
+========================================= */
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
     .receptionist-page {
-        padding: 23px 15px 32px;
+        padding: 22px 15px 30px;
     }
     .receptionist-page-header {
         align-items: flex-start;
         margin-bottom: 22px;
     }
     .receptionist-page-header h1 {
-        font-size: 27px;
-        letter-spacing: -0.8px;
+        font-size: 26px;
     }
     .receptionist-page-header p {
-        font-size: 13px;
+        font-size: 12px;
     }
     .receptionist-page-header::after {
-        width: 42px;
-        height: 42px;
-        margin-left: 10px;
-        font-size: 20px;
+        width: 40px;
+        height: 40px;
+        margin-left: 5px;
+        font-size: 19px;
     }
     .receptionist-stats {
         gap: 11px;
@@ -677,46 +694,76 @@
     .receptionist-stat-card {
         align-items: flex-start;
         flex-direction: column;
-        gap: 12px;
+        gap: 11px;
         min-height: 0;
-        padding: 16px;
-        border-radius: 15px;
+        padding: 15px;
     }
     .receptionist-stat-icon {
-        width: 42px;
-        height: 42px;
-        border-radius: 12px;
+        width: 34px;
+        height: 34px;
+        flex-basis: 34px;
+        border-radius: 10px;
+    }
+    .receptionist-stat-icon svg {
+        width: 18px;
+        height: 18px;
     }
     .receptionist-stat-card span {
         margin-bottom: 6px;
-        font-size: 12px;
+        font-size: 11px;
     }
     .receptionist-stat-card strong {
-        font-size: 23px;
+        font-size: 24px;
+    }
+    .receptionist-dashboard-grid {
+        gap: 14px;
     }
     .receptionist-section {
-        padding: 20px 16px;
-        border-radius: 17px;
+        padding: 17px;
     }
     .receptionist-section-header {
-        margin-bottom: 20px;
+        margin-bottom: 17px;
     }
     .receptionist-section-header h2 {
-        font-size: 19px;
+        font-size: 16px;
+    }
+    .receptionist-section-header p {
+        font-size: 11px;
     }
     .receptionist-actions {
-        gap: 10px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 9px;
     }
     .receptionist-actions button {
-        min-height: 104px;
-        gap: 13px;
-        padding: 14px;
-        font-size: 12px;
+        min-height: 75px;
+        padding: 11px;
+        gap: 9px;
+        font-size: 11px;
     }
     .receptionist-actions button svg {
         width: 19px;
         height: 19px;
     }
+    .receptionist-activity-list,
+    .receptionist-empty {
+        min-height: 220px;
+    }
+    .receptionist-activity-item {
+        gap: 9px;
+        padding: 12px 0;
+    }
+    .receptionist-activity-icon {
+        width: 34px;
+        height: 34px;
+    }
+    .receptionist-activity-info strong {
+        font-size: 11px;
+    }
+    .receptionist-activity-info span,
+    .receptionist-activity-time {
+        font-size: 10px;
+    }
+    /* Modal */
     .receptionist-modal-overlay {
         align-items: flex-start;
         padding: 12px;
@@ -724,15 +771,25 @@
     .receptionist-modal {
         max-height: calc(100vh - 24px);
         margin: auto 0;
-        padding: 21px 17px;
-        border-radius: 18px;
+        padding: 20px 16px;
+        border-radius: 14px;
+    }
+    .receptionist-modal-header {
+        margin-bottom: 18px;
+        padding-bottom: 16px;
     }
     .receptionist-modal-header h2 {
-        font-size: 21px;
+        font-size: 19px;
+    }
+    .receptionist-modal-header p {
+        font-size: 11px;
     }
     .receptionist-form-row {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 17px;
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    .receptionist-form {
+        gap: 15px;
     }
     .receptionist-form-actions {
         flex-direction: column-reverse;
@@ -743,11 +800,82 @@
     }
 }
 
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 380px) {
+    .receptionist-stats {
+        grid-template-columns: 1fr;
+    }
+    .receptionist-stat-card {
+        flex-direction: row;
+        align-items: center;
+    }
+    .receptionist-actions {
+        grid-template-columns: 1fr;
+    }
+    .receptionist-actions button {
+        min-height: 65px;
+    }
+    .receptionist-page-header::after {
+        display: none;
+    }
+}
+
+
+/* =========================================
+   ACCESSIBILITY
+========================================= */
+
 @media (prefers-reduced-motion: reduce) {
     .receptionist-page *,
     .receptionist-page *::before,
     .receptionist-page *::after {
         animation-duration: 0.01ms !important;
         transition-duration: 0.01ms !important;
+    }
+}
+
+
+/* SmartGym Brand */
+
+.receptionist-brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 32px;
+}
+
+.receptionist-brand-icon {
+    display: grid;
+    place-items: center;
+    flex: 0 0 48px;
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background: #7c3aed;
+    color: #ffffff;
+}
+
+.receptionist-brand h2 {
+    margin: 0 0 6px;
+    color: #171522;
+    font-size: 21px;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.receptionist-brand span {
+    color: #777487;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+}
+
+@media (max-width: 700px) {
+    .receptionist-brand {
+        margin-bottom: 22px;
     }
 }
