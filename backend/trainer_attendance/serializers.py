@@ -4,15 +4,19 @@ from .models import TrainerAttendance
 
 
 class TrainerAttendanceSerializer(serializers.ModelSerializer):
+
     trainer_username = serializers.CharField(
         source="trainer.username",
         read_only=True
     )
+
     trainer_name = serializers.SerializerMethodField()
+
     duration_seconds = serializers.ReadOnlyField()
 
     class Meta:
         model = TrainerAttendance
+
         fields = [
             "id",
             "trainer",
@@ -22,8 +26,10 @@ class TrainerAttendanceSerializer(serializers.ModelSerializer):
             "check_in",
             "check_out",
             "duration_seconds",
+            "auto_checked_out",
             "created_at",
         ]
+
         read_only_fields = fields
 
     def get_trainer_name(self, obj):
